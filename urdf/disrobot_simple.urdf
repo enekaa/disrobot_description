@@ -20,9 +20,9 @@
 
   <link name="base_footprint">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 0" xyz="-0.0764 0 0"/> <!-- (0.61-0.4572)/2 = 0.0764 -->
       <geometry>
-        <box size="0.4572 0.4 0.00"/> <!-- Adjust the size as needed -->
+        <box size="0.61 0.4 0.00"/> <!-- Adjust the size as needed -->
       </geometry>
       <material name="black"/>
     </visual>
