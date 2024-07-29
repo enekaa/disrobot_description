@@ -1,0 +1,193 @@
+﻿<?xml version="1.0"?>
+<robot name="disrobot">
+
+  <material name="yellow">
+    <color rgba="1.0 1.0 0.0 1.0"/>
+  </material>
+
+  <material name="green">
+    <color rgba="0.0 1.0 0.0 1.0"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+
+  <link name="base_link">
+  </link>
+
+  <!-- Body -->
+  <link name="chassis">    
+    <visual>
+    <origin rpy="0 0 0" xyz="0 0 0.05"/>
+      <geometry>
+        <box size="0.4572 0.3048 0.04"/>
+      </geometry>
+      <material name="yellow"/>
+    </visual>
+
+    <visual>
+    <origin rpy="0 0 0" xyz="-0.0764 0.0884 0.114"/> <!-- 0.3048/2-0.045-0.038/2 = 0.0884 -->
+      <geometry>
+        <box size="0.61 0.038 0.088"/>
+      </geometry>
+      <material name="yellow"/>
+    </visual>
+
+    <visual>
+    <origin rpy="0 0 0" xyz="-0.0764 -0.0884 0.114"/> <!-- 0.0884 -->
+      <geometry>
+        <box size="0.61 0.038 0.088"/>
+      </geometry>
+      <material name="yellow"/>
+    </visual>
+  </link>
+
+  <joint name="base_link_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_link" />
+    <child link="chassis" />
+  </joint>
+
+  <!-- Motor Wheel Left -->
+  <link name="motor_wheel_left">      
+      <visual>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.0381" radius="0.05"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  </link>
+
+  <joint name="joint_motor_wheel_left" type="continuous">
+    <origin rpy="0 0 0" xyz="-0.1786 0.17145 0.05"/>
+    <child link="motor_wheel_left"/>
+    <parent link="chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <!-- limit effort="10000" velocity="1000"/ -->
+    <!-- joint_properties damping="1.0" friction="1.0"/ -->
+  </joint>
+
+  <!-- Motor Wheel Right -->
+  <link name="motor_wheel_right">      
+      <visual>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.0381" radius="0.05"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  </link>
+
+  <joint name="joint_motor_wheel_right" type="continuous">
+    <origin rpy="0 0 0" xyz="-0.1786 -0.17145 0.05"/>
+    <child link="motor_wheel_right"/>
+    <parent link="chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <!-- limit effort="10000" velocity="1000"/ -->
+    <!-- joint_properties damping="1.0" friction="1.0"/ -->
+  </joint>
+
+  <!-- Middle Wheel Left -->
+  <link name="middle_wheel_left">      
+      <visual>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.0381" radius="0.05"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  </link>
+
+  <joint name="joint_middle_wheel_left" type="continuous">
+    <origin rpy="0 0 0" xyz="0 0.17145 0.05"/>
+    <child link="middle_wheel_left"/>
+    <parent link="chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <mimic joint="joint_motor_wheel_left" multiplier="1.0" offset="0.0"/>
+    <!-- limit effort="10000" velocity="1000"/ -->
+    <!-- joint_properties damping="1.0" friction="1.0"/ -->
+  </joint>
+
+  <!-- Middle Wheel Right -->
+  <link name="middle_wheel_right">      
+      <visual>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.0381" radius="0.05"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  </link>
+
+  <joint name="joint_middle_wheel_right" type="continuous">
+    <origin rpy="0 0 0" xyz="0 -0.17145 0.05"/>
+    <child link="middle_wheel_right"/>
+    <parent link="chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <mimic joint="joint_motor_wheel_right" multiplier="1.0" offset="0.0"/>
+    <!-- limit effort="10000" velocity="1000"/ -->
+    <!-- joint_properties damping="1.0" friction="1.0"/ -->
+  </joint>
+
+    <!-- Middle Wheel Left -->
+  <link name="front_wheel_left">      
+      <visual>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.0381" radius="0.05"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  </link>
+
+  <joint name="joint_front_wheel_left" type="continuous">
+    <origin rpy="0 0 0" xyz="0.1786 0.17145 0.05"/>
+    <child link="front_wheel_left"/>
+    <parent link="chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <mimic joint="joint_motor_wheel_left" multiplier="1.0" offset="0.0"/>
+    <!-- limit effort="10000" velocity="1000"/ -->
+    <!-- joint_properties damping="1.0" friction="1.0"/ -->
+  </joint>
+
+  <!-- Front Wheel Right -->
+  <link name="front_wheel_right">      
+      <visual>
+        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+        <geometry>
+          <cylinder length="0.0381" radius="0.05"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+  </link>
+
+  <joint name="joint_front_wheel_right" type="continuous">
+    <origin rpy="0 0 0" xyz="0.1786 -0.17145 0.05"/>
+    <child link="front_wheel_right"/>
+    <parent link="chassis"/>
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <mimic joint="joint_motor_wheel_right" multiplier="1.0" offset="0.0"/>
+    <!-- limit effort="10000" velocity="1000"/ -->
+    <!-- joint_properties damping="1.0" friction="1.0"/ -->
+  </joint>
+
+  <!-- RPiLIDAR Sensor -->
+  <link name="laser_frame">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.0345"/> <!-- Adjust size as needed -->
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="joint_laser" type="fixed">
+    <origin rpy="0 0 0" xyz="0.0036 0.0 0.217"/> <!-- 0.07 (chassis) + 0.088 (2x4s) + 0.02/2 (lidar/2) + 0.049 (lidar mount) = 0.217 -->
+    <child link="laser_frame"/>
+    <parent link="chassis"/> <!-- Or another appropriate link -->
+  </joint>
+
+</robot>
