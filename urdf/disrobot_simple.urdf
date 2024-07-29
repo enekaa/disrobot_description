@@ -16,6 +16,25 @@
   <link name="base_link">
   </link>
 
+  <!-- Footprint -->
+
+  <link name="base_footprint">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.4572 0.4 0.00"/> <!-- Adjust the size as needed -->
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="base_link" />
+    <child link="base_footprint" />
+  </joint>
+
+
   <!-- Body -->
   <link name="chassis">    
     <visual>
